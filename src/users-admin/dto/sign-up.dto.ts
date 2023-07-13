@@ -28,10 +28,4 @@ export class SignUpDTO{
 
     @IsDate()
     updatedAt: Date; 
-
-    constructor(data: { email: string; password: string }) {
-        this.email = data.email;
-        this.password = data.password;
-    }
-
 }

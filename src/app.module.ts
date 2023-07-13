@@ -1,21 +1,27 @@
 import { Module } from '@nestjs/common';
-import { UserAutenticationModule } from './user-autentication/autentication.module';
 import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user-autentication/users/user.module';
 import { AuthGuard } from './guards/auth.guard';
+import { User } from './database/entities/users.entity';
+import { Roles } from './database/entities/roles.entity';
+import { UserAutenticationModule } from './users-admin/autentication.module';
+import { UserModule } from './users-admin/users/user.module';
 
 @Module({
   imports: [
-        TypeOrmModule.forRoot({
-          type: 'postgres',
-          host: process.env.DB_HOST,
-          port: parseInt(process.env.DB_PORT, 10),
-          username: process.env.DB_USERNAME,
-          password: process.env.DB_PASSWORD,
-          database: process.env.DB_DATABASE
-      }),
-      UserAutenticationModule, UserModule
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT, 10),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      entities: [User, Roles],
+      synchronize : true
+    }),
+    UserAutenticationModule, UserModule
   ],
   controllers: [],
   providers: [
@@ -25,4 +31,4 @@ import { AuthGuard } from './guards/auth.guard';
     }
   ],
 })
-export class AppModule {}
+export class AppModule { }

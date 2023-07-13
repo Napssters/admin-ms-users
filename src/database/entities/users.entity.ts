@@ -20,7 +20,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
    @Column() 
    role: string; 
 
-   @Column() 
+   @Column({ default: false }) 
    isDeleted: boolean; 
   
    @Column({ type: 'timestamp with time zone', default: () => 'CURRENT_TIMESTAMP' }) 
