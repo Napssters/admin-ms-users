@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException  } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from 'src/database/entities/users.entity';
+import { User } from 'src/entities/users.entity';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { uuid } from 'uuid';

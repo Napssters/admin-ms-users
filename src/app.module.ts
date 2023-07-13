@@ -3,8 +3,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthGuard } from './guards/auth.guard';
-import { User } from './database/entities/users.entity';
-import { Roles } from './database/entities/roles.entity';
+import { User } from './entities/users.entity';
+import { Roles } from './entities/roles.entity';
 import { UserAutenticationModule } from './users-admin/autentication.module';
 import { UserModule } from './users-admin/users/user.module';
 
