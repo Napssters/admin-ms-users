@@ -20,7 +20,7 @@ export class AuthUserService {
             id: uuid,
             fullname: signup.fullname,
             email: signup.email,
-            password: signup.password,
+            password: hashedPassword,
             phone: signup.phone,
             role: signup.role,
             isDeleted: false,
@@ -38,6 +38,7 @@ export class AuthUserService {
             throw new UnauthorizedException('Invalid email');
         }
 
+        console.log(" no db: ", signIn.password, " db: ", user.password)
         const passwordIsValid = await bcrypt.compare(
             signIn.password,
             user.password,
