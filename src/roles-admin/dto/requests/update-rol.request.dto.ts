@@ -1,6 +1,6 @@
 import { IsString, IsEmail, IsDate } from "class-validator";
 
-export class updateRolRequestDTO {
+export class UpdateRolRequestDTO {
 
     @IsString()
     name: string;
