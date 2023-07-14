@@ -27,7 +27,7 @@ export class UserService {
       console.log(error.message);
       throw new Error('Failed to create user');
     }
-    
+
   }
 
   async update(email: string, updatedData: Partial<updateUserRequestDTO>): Promise<User> {
@@ -36,7 +36,8 @@ export class UserService {
       if (!user) {
         throw new Error('Entity not found');
       }
-  
+
+      updatedData.updatedAt = new Date();
       const updatedEntity = { ...user, ...updatedData };
 
       return await this.userRepository.save(updatedEntity);
@@ -48,7 +49,13 @@ export class UserService {
 
   async softDelete(email: string): Promise<string> {
     try {
-      await this.userRepository.update(email, { isDeleted: true });
+      const user = await this.userRepository.findOne({ where: { email } });
+      
+      if (!user) {
+        throw new Error('Entity not found');
+      }
+
+      await this.userRepository.update(user.id, { isDeleted: true });
       return "User deleted successfully.";
     } catch (error) {
       console.log(error.message);

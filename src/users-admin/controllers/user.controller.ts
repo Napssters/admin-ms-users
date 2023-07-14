@@ -21,7 +21,7 @@ export class UserController {
         return this.userService.update(email, updatedData);
     }
     
-    @Patch('delete-user')
+    @Patch('delete-user/:email')
     deleteUsers(@Param('email') email: string): Promise<string> {
         return this.userService.softDelete(email);
     }
